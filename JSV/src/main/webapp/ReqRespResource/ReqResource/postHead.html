@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+</head>
+<body>
+
+<form action="reqPostHeader" method="post" enctype="multipart/form-data">
+    application/x- www-form-urlencoded是Post请求默认的请求体内容类型，也是form表单默认的类型
+    Servlet API规范中对该类型的请求内容提供了request.getParameter()方法来获取请求参数值
+
+    即对该类型的请求，三个方法互斥，只能调其中一个
+
+    但当请求内容不是该类型时，需要调用request.getInputStream()或request.getReader()方法来获取请求内容值。
+
+
+    类型是application/x- www-form-urlencoded时也可以直接调用request.getInputStream()
+    或request.getReader()方法获取到请求内容再解析出具体都参数
+    前提： 还没调用request.getParameter()
+    <input type="text" placeholder="请输入用户名" name="username"><br>
+    <input type="text" placeholder="请输入密码" name="password"><br>
+    <input type="submit" value="注册">
+    src/main/webapp/PostMethod/postHead2.html、
+    当请求体内容是其它类型时，比如 multipart/form-data或application/json时，无法通过request.getParameter()获取到请求内容，
+    此时只能通过request.getInputStream()和request.getReader()方法获取请求内容，
+    此时调用request.getParameter()也不会影响第一次调用request.getInputStream()或
+    request.getReader()获取到请求内容
+
+    流只能读一次，代码中重复读流就会出现该问题
+</form>
+
+</body>
+</html>
